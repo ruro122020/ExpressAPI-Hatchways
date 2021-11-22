@@ -1,65 +1,13 @@
-const server = require("../app");
+const server = require("../../app");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const {
-  assignDefaultIfUndefined,
-  checkTagsExist,
-  getPosts,
-  checkAcceptableFields,
-} = require("../helpers/helpers");
 
 //Assertion
 chai.should();
 chai.use(chaiHttp);
-const expect = chai.expect;
-const assert = chai.assert;
-describe("Testing helpers", () => {
-  it("Should assign and return the default value ", () => {
-    const sortByDefaultValue = "id";
-    let sortBy = undefined;
-    sortBy = assignDefaultIfUndefined(sortBy, sortByDefaultValue);
-    assert.typeOf(sortBy, "string");
-    assert.equal(sortBy, "id", "sortBy equals `id`");
-  });
 
-  it("Should return an error message if tags are undefined", () => {
-    let tags;
-    const response = checkTagsExist(tags);
-    assert.typeOf(response, "Object");
-    assert.equal(
-      response.error,
-      "Tags parameter is required",
-      `error message equals ${response.error}`
-    );
-  });
-
-  it("should return an error message if fields do not exist", () => {
-    const directionFields = {
-      desc: true,
-      asc: true,
-    };
-    const direction = "de";
-    const directionErr = checkAcceptableFields(
-      direction,
-      directionFields,
-      "direction"
-    );
-    assert.typeOf(directionErr, "object");
-    assert.equal(directionErr.error, "direction parameter is invalid");
-  });
-
-  it("Should return an array", async () => {
-    const tags = "science,tech";
-    const sortBy = "popularity";
-    const direction = "desc";
-
-    const response = await getPosts(tags, sortBy, direction);
-    assert.typeOf(response, "array");
-  });
-});
-
-describe("Testing server routes", () => {
-  describe("Test GET route for /api/ping", () => {
+describe("Testing Routes", () => {
+  describe("Test GET route to /api/ping", () => {
     it("Should return status code 200", (done) => {
       chai
         .request(server)
@@ -81,7 +29,7 @@ describe("Testing server routes", () => {
     });
   });
 
-  describe("Test GET route for /api/posts", () => {
+  describe("Test GET route to /api/posts", () => {
     it("Should return status code 200 if tags param was defined", (done) => {
       chai
         .request(server)
@@ -129,7 +77,7 @@ describe("Testing server routes", () => {
       chai
         .request(server)
         .get("/api/posts")
-        .query({ tags: "science,tech", sortBy: "cars" })
+        .query({ tags: "science,tech", sortBy: "ratings" })
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -139,7 +87,7 @@ describe("Testing server routes", () => {
       chai
         .request(server)
         .get("/api/posts")
-        .query({ tags: "science,tech", sortBy: "cars" })
+        .query({ tags: "science,tech", sortBy: "ratings" })
         .end((err, res) => {
           res.body.should.be.a("object");
           res.body.should.have

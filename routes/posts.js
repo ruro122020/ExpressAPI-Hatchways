@@ -5,7 +5,7 @@ const {
   checkTagsExist,
   checkAcceptableFields,
   getPosts,
-} = require("../helpers/helpers");
+} = require("../models/models");
 
 posts.get("/api/posts", async (req, res) => {
   const defaultSortByValue = "id";

@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "nodemon app.js",
-    "test": "mocha test/tests.js"
+    "test": "mocha tests/tests.js"
   },
   "author": "",
   "license": "ISC"
