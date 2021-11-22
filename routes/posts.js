@@ -4,21 +4,33 @@ const {
   assignDefaultIfUndefined,
   checkTagsExist,
   checkAcceptableFields,
-  checkAcceptableDirections,
   getPosts,
 } = require("../helpers/helpers");
 
-const defaultSortByValue = "id";
-const defaultDirectionValue = "asc";
-
 posts.get("/api/posts", async (req, res) => {
+  const defaultSortByValue = "id";
+  const defaultDirectionValue = "asc";
+  const sortByFields = {
+    id: true,
+    reads: true,
+    likes: true,
+    popularity: true,
+  };
+  const directionFields = {
+    desc: true,
+    asc: true,
+  };
   let { tags, sortBy, direction } = req.query;
   sortBy = assignDefaultIfUndefined(sortBy, defaultSortByValue);
   direction = assignDefaultIfUndefined(direction, defaultDirectionValue);
   const tagErr = checkTagsExist(tags);
-  const sortByErr = checkAcceptableFields(sortBy);
-  const directionErr = checkAcceptableDirections(direction);
-  console.log("tags", tags);
+  const sortByErr = checkAcceptableFields(sortBy, sortByFields, "sortBy");
+  const directionErr = checkAcceptableFields(
+    direction,
+    directionFields,
+    "direction"
+  );
+
   if (tagErr && tagErr.error) {
     res.status(400).json(tagErr);
     return;

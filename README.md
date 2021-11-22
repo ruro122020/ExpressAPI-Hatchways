@@ -9,6 +9,6 @@ To access api endpoints:
 
 **To run tests:**
 
-If you haven't done the steps above, do steps 1-3 then:
+If you haven't done the steps above, do steps 1-3, then:
 
 1. run `npm test`

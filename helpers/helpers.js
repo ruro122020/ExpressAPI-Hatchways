@@ -40,26 +40,9 @@ const assignDefaultIfUndefined = (parameter, defaultValue) => {
   return parameter;
 };
 
-const checkAcceptableFields = (sortBy) => {
-  if (
-    sortBy !== "id" &&
-    sortBy !== "reads" &&
-    sortBy !== "likes" &&
-    sortBy !== "popularity"
-  ) {
-    return { error: "SortBy parameter is invalid" };
-  }
-};
-
 const checkTagsExist = (tags) => {
   if (!tags) {
     return { error: "Tags parameter is required" };
-  }
-};
-
-const checkAcceptableDirections = (direction) => {
-  if (direction !== "desc" && direction !== "asc") {
-    return { error: "direction parameter is invalid" };
   }
 };
 const getPosts = async (tags, sortBy, direction) => {
@@ -74,10 +57,15 @@ const getPosts = async (tags, sortBy, direction) => {
     return false;
   }
 };
+
+const checkAcceptableFields = (field, objectOfFields, type) => {
+  if (!objectOfFields[field]) {
+    return { error: `${type} parameter is invalid` };
+  }
+};
 module.exports = {
   assignDefaultIfUndefined,
   checkTagsExist,
   checkAcceptableFields,
-  checkAcceptableDirections,
   getPosts,
 };
