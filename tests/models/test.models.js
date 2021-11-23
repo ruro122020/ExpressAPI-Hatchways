@@ -6,7 +6,7 @@ const {
   checkAcceptableFields,
 } = require("../../models/models");
 
-describe("Testing Models", () => {
+describe("Testing Logic", () => {
   it("Should assign and return the default value ", () => {
     const sortByDefaultValue = "id";
     let sortBy = undefined;

@@ -1,5 +1,6 @@
 const axios = require("axios");
 
+//These functions help sort the data
 const sortByProperty = (array, property = "id", direction = "asc") => {
   if (direction === "desc") {
     //sort by descend
@@ -34,6 +35,8 @@ const removeRepeats = (arr) => {
   });
   return repeatsRemoved;
 };
+
+/***************************************************************/
 
 const assignDefaultIfUndefined = (parameter, defaultValue) => {
   if (typeof parameter === "undefined") return defaultValue;

@@ -2,8 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const app = express();
-const ping = require("./routes/ping");
-const posts = require("./routes/posts");
+const ping = require("./controllers/ping");
+const posts = require("./controllers/posts");
 
 app.use(logger("dev"));
 app.use(express.json());

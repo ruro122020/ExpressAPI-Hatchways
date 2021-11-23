@@ -1,14 +1,5 @@
-**How to get started:**
-
-To access api endpoints:
-
-1. clone the repo
-2. cd into the project
-3. run `npm install`
-4. run `npm start`
-
-**To run tests:**
-
-Ensure steps 1-3 have been completed before running test command:
-
-1. run `npm test`
+1. In the terminal within the project run `npm install`
+2. To start the server run `npm start`. The server will be located at https://localhost:3000
+3. The solution to step 1 is located at https://localhost:3000/api/ping
+4. The solution to step 2 is located at https://localhost:3000/api/posts. Pass in tags, sortBy, and direction query parameters in the url to view results
+5. Lastly, run `npm test` in the terminal to view test for routes and models
